@@ -7,6 +7,7 @@ import PostList from "./component/PostList";
 import MyButton from "./component/UI/button/MyButton";
 import MyInput from "./component/UI/input/MyInput";
 import PostForm from "./component/PostForm";
+import MySelect from "./component/UI/select/MySelect";
 // import PostForm from "./component/PostForm";
 
 
@@ -29,6 +30,16 @@ function App() {
   return (
     <div className="App">
      <PostForm create={createPost}/>
+     <hr style={{margin: '15px 0'}}/>
+      <div>
+        <MySelect
+        defaultValue="Сортировка"
+        options={[
+          {value:'title' , name:'По названию'},
+          {value:'body' , name:'По описанию'},
+        ]}
+        />
+      </div>
      {posts.length 
      ? <PostList remove={removePost} posts={posts} title='Посты про JS'/>
      : <h1 style={{textAlign: "center"}}>
