@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import Counter from "./component/Counter";
 import ClassCounter from "./component/ClassCounter";
 import './Styles/app.css';
@@ -23,16 +23,14 @@ function App() {
   const [selectedSort, setselectedSort] = useState('')
   const [searchQuery, setsearchQuery] = useState('')
 
-  function getSortedPosts() {
+  const sortedPosts = useMemo(() => {
     console.log('Отработала Функция сортед')
     if (selectedSort)
     {
         return [...posts].sort((a,b)=> a[selectedSort].localeCompare(b[selectedSort]))
     }
-        return posts; 
-  }
-
-  const sortedPosts = getSortedPosts()
+        return posts;
+  },[selectedSort, posts])
 
   const createPost = (newPost) => {
       setPosts([...posts, newPost])
