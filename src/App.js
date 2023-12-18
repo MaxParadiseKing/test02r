@@ -9,6 +9,7 @@ import MyInput from "./component/UI/input/MyInput";
 import PostForm from "./component/PostForm";
 import MySelect from "./component/UI/select/MySelect";
 import PostFilter from "./component/PostFilter";
+import MyModal from "./component/UI/MyModal/MyModal";
 // import PostForm from "./component/PostForm";
 
   
@@ -46,19 +47,15 @@ function App() {
   
   return (
     <div className="App">
-     <PostForm create={createPost}/>
+      <MyModal visible={true}> 
+        <PostForm create={createPost}/> 
+      </MyModal>
      <hr style={{margin: '15px 0'}}/>
       <PostFilter 
       filter={filter}
        setFilter={setFilter}
        />
-     {sortedAndSearchedPosts.length   
-     ? <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Посты про JS'/>
-     : <h1 style={{textAlign: "center"}}>
-      Посты не найдены!
-      </h1>
-     }
-         
+     <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Посты про JS'/>
     </div> 
   );
 }
