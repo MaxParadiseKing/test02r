@@ -1,6 +1,6 @@
 import React from "react";
 import PostItem from "./PostItem";
-import { TransitionGroup } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const PostList = ({posts, title, remove}) => {
     
@@ -21,7 +21,7 @@ const PostList = ({posts, title, remove}) => {
             {posts.map((post, index) =>
             <CSSTransition
             key={post.id}
-            nodeRef={nodeRef}
+            // nodeRef={nodeRef}
             timeout={500}
             classNames="post"
           >
