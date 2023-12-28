@@ -11,6 +11,7 @@ import MySelect from "./component/UI/select/MySelect";
 import PostFilter from "./component/PostFilter";
 import MyModal from "./component/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
+import axios from "axios";
 
 // import PostForm from "./component/PostForm";
 
@@ -27,12 +28,18 @@ function App() {
       setModal(false)
   }
 
+  async function fetchPosts() {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    console.log(response.data)
+  }
+
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !==post.id))
   }
   
   return (
     <div className="App">
+      <button onClick={fetchPosts}>GET POST</button>
       <MyButton style={{marginTop: 30}}onClick={() => setModal(true)}> 
           Создать пользователя
       </MyButton>
