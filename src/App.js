@@ -12,10 +12,9 @@ import PostFilter from "./component/PostFilter";
 import MyModal from "./component/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
 import axios from "axios";
+import PostService from "./API/postService";
 
 // import PostForm from "./component/PostForm";
-
-  
 
 function App() {
  const [posts, setPosts] = useState ([])
@@ -33,8 +32,8 @@ function App() {
   }
 
   async function fetchPosts() {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    setPosts(response.data)
+    const posts = await PostService.getAll();
+    setPosts(posts)
   }
 
   const removePost = (post) => {
