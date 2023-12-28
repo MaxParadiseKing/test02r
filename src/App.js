@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Counter from "./component/Counter";
 import ClassCounter from "./component/ClassCounter";
 import './Styles/app.css';
@@ -23,6 +23,10 @@ function App() {
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts =usePosts(posts, filter.sort, filter.query);
 
+  useEffect(() => {
+    fetchPosts()
+  },[])
+
   const createPost = (newPost) => {
       setPosts([...posts, newPost])
       setModal(false)
@@ -39,7 +43,7 @@ function App() {
   
   return (
     <div className="App">
-      <button onClick={fetchPosts}>GET POST</button>
+      {/* <button onClick={fetchPosts}>GET POST</button> */}
       <MyButton style={{marginTop: 30}}onClick={() => setModal(true)}> 
           Создать пользователя
       </MyButton>
