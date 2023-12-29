@@ -62,7 +62,7 @@ function App() {
        setFilter={setFilter}
        />
        {isPostsLoading
-            ? <Loader/>
+            ? <div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}><Loader/></div>
             : <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Посты про JS'/>
        }
     </div> 
