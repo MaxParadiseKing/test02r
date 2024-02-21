@@ -16,16 +16,20 @@ import PostService from "./API/postService";
 import Loader from "./component/UI/Loader/Loader";
 import { useFetching } from "./hooks/useFetching";
 
-// import PostForm from "./component/PostForm";
-
 function App() {
  const [posts, setPosts] = useState ([])
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [modal, setModal] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
   const sortedAndSearchedPosts =usePosts(posts, filter.sort, filter.query);
+  
   const [fetchPosts, isPostsLoading, postError] = useFetching(async() => {
-    const posts = await PostService.getAll();
-    setPosts(posts)
+    const response = await PostService.getAll(limit, page);
+    setPosts(response.data)
+    console.log(response.headers['x-total-count'])
+    setTotalCount(response.headers['x-total-count'])
   })
 
   useEffect(() => {
@@ -55,6 +59,9 @@ function App() {
       filter={filter}
        setFilter={setFilter}
        />
+       {postError &&
+       <h1>Произошла ошибка! ${postError}</h1>
+       }
        {isPostsLoading
             ? <div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}><Loader/></div>
             : <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Посты про JS'/>
